@@ -1,0 +1,19 @@
+.container {
+    border: 1 px solid rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.heading {
+    text-align: center;
+    margin: 15px;
+}
+
+.stock-section {
+   list-style: none;
+}
+
+.loaders {
+    text-align: center;
+    padding-left: 20px;
+    padding: 10px;
+}

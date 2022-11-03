@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="fluid-container">
+        <div class="heading">
+            <h2>Stock Details</h2>
+        </div>
+        <div class="card">
+            <div class="row">
+                <div class="loaders" *ngIf="dataStatus">Loading... Please wait</div>
+                <div class="col-md-12">
+                <h4 *ngIf="symbolName" class="mt-2 p-4">{{symbolName | titlecase}} ({{symbolName}})</h4>
+                </div>
+                <div *ngIf = "!sentimentData.length">No data..</div>
+                <div class="col-md-4 col-sm-4 col-4"
+                   *ngFor="let sentData of sentimentData; let i = index">
+                   <div class="stock-sec d-flex">
+                    <ul class="mr-5 stock-section">
+                      <li>{{ getMonthName(sentData?.month) | uppercase }}</li>
+                      <li>Change: {{ sentData?.change }}</li>
+                      <li>MSPR: {{ sentData?.mspr }}</li>
+                    </ul>
+                    <div>
+                        <div
+                          *ngIf="sentData?.change < 0"
+                          class="stock-sym"
+                          style="color:red"
+                        >
+                          🡻
+                        </div>
+                        <div
+                          *ngIf="sentData?.change > 0"
+                          class="stock-sym"
+                          style="color:green"
+                        >
+                          🡹
+                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a routerLink = '/' class="btn btn-link" 
+            routerLinkActive="active">Back to list of stocks
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></a>
+          </div>
+    </div>
+ </div>
+</div>

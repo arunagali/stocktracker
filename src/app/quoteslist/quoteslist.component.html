@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="fluid-container">
+    <div class="heading">
+      <h2>Stock Tracker</h2>
+    </div>
+
+    <div class="form-group track-sec">
+      <form class="form-inline" [formGroup] = 'formGroup' (ngSubmit)="quotesDataDetails()" novalidate>
+        <div class="row">
+        <div class="col-md-12">
+          <div class="quote-label mb-4">
+            <label for="stock">Enter the symbol of a stock to track (i.e. AAPL, TSLA)</label>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+        <div class="form-group col-sm-3 mb-2">
+          <input [class.is-invalid]="formGroup.get('symbol').invalid && formGroup.get('symbol').touched" type="text" class="form-control" id="stockInput" autocomplete="off"
+            formControlName="symbol" placeholder="Enter stock symbol" required/>
+        </div>
+            <button type="submit"
+          class="btn btn-primary col-sm-3 mb-2 quote-btn">Track Stock
+        </button>
+        <div *ngIf="formGroup.get('symbol').invalid && formGroup.get('symbol').touched">
+          <small class="text-danger" *ngIf="formGroup.get('symbol').errors?.required">
+            Stock symbol is required</small>
+          <small class="text-danger" *ngIf="formGroup.get('symbol').errors?.minlength">
+            Stock symbol must be atleast 1 character</small>
+            <small class="text-danger" *ngIf="formGroup.get('symbol').errors?.maxlength">
+              Stock symbol must be 5 characters only</small>
+        </div>
+      </div>
+      </form>
+  </div>
+
+    <div class="row">
+      <div class="loaders" *ngIf="!quoteStatus">
+        Loading data, Please wait...
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-sm-6" *ngFor="let quote of quotesList; let i = index">
+        <div class="card mb-2">
+        <span class="delete-quote">
+          <i (click)="deleteStock(i, stock)" class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </span>
+        <div class="card-body">
+          <h5 class="card-title">
+              {{quote.description | uppercase}} {{quote.symbol}}
+          </h5>
+          <div class="quote-block">
+            <ul class="quote-section">
+              <li class="card-text">Change today: {{quote?.d | percent}}</li>
+              <li class="card-text">Current price: {{quote?.c | currency}}</li>
+            </ul>
+            <ul class="quote-section">
+              <li class="card-text">Opening price: {{quote?.o | currency}}</li>
+              <li class="card-text">High price: {{quote?.h | currency}}</li>
+            </ul>
+            <div>
+              <div *ngIf="quote?.d < -0"
+                          class="stock-sym"
+                          style="color:red"
+                        >
+                          🡻
+                        </div>
+                        <div
+                          *ngIf="quote?.d > +0"
+                          class="stock-sym"
+                          style="color:green"
+                        >
+                          🡹
+                        </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <a routerLink = '/sentimentpage/{{quote?.symbol}}' class="btn btn-link" 
+              routerLinkActive="active">See sentiment details 
+              <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

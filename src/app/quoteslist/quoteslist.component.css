@@ -1,0 +1,40 @@
+.track-sec {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    
+}
+
+.heading {
+    text-align: center;
+    margin: 15px;
+}
+
+.quote-label {
+    float: left;
+}
+
+.quote-btn {
+    margin: 2px;
+    
+}
+
+.delete-quote {
+  text-align: right;
+  margin: 15px;
+}
+
+.quote-block {
+    display: flex;
+    
+}
+
+.quote-section {
+   flex: 1;
+   list-style: none;
+}
+
+.loaders {
+    text-align: center;
+    padding-left: 20px;
+    padding: 10px;
+}
